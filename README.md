@@ -8,6 +8,9 @@ It is divided in two parts: Client/Peer (NoMitmChat) and Server (NoMitmChatServe
 The server only purpose is to keep a list of registered users, in form of ip address and username. \
 The clients are able to communicate directly using UDP sockets in one of these two ways: already knowing the other peer, or registering to the server (through a TCP connection) and asking for a list of registrated users, which it can then contact.
 
+![Screenshot From 2025-05-16 16-53-50](https://github.com/user-attachments/assets/8ef044b2-aa08-4bf2-ae08-ed618a6ff736)
+![Screenshot From 2025-05-16 17-10-58](https://github.com/user-attachments/assets/3a23b000-a6f1-4ddd-8880-7fd2dede8082)
+
 ## PeerChat protocol
 ### Client-server
 Client contacts server on default port 6969 with a HELLO message. \
