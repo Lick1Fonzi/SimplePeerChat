@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>0</y>
+      <w>330</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>::Message
+--
++CONNECT = "Connect": String
++MSG = "Msg": String
++CLOSE = "Close": String
+-type: String
+-txt: String
+-user: String
+--
++Message(String user, String type, String txt): ctor
++Message(String protocolMsg): ctor
++unify(): String
++chatLine(): String
++getType(): String
++setType(String type): void
++getTxt(): String
++setTxt(String txt): void
++getUser(): String
++setUser(String user): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>0</y>
+      <w>450</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>::PeerConnection
+--
+~sock: DatagramSocket
+~connected: boolean
+~closed: boolean
+~lPort: int
+~rPort: int
+~otherIp: InetAddress
+~keepAliveToken: int
+~num: int
+~me, other: Contact
+~r: Receiver
+~txtarea: JTextArea
+--
++PeerConnection(Contact me, Contact other, JTextArea txtarea): ctor
++closeConnection(): void
++run(): void
++sendMsg(String msg): void
++data(byte[] a): StringBuilder
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>0</y>
+      <w>580</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>::serverConnectionHandler
+--
+-ip: InetAddress
+-port: int
+-main: PeerChat
+-username: String
+-out: PrintWriter
+-in: BufferedReader
+--
++serverConnectionHandler(InetAddress ip, int port, String username, PeerChat main): ctor
++isPortAvail(int port): boolean
++getUserList(): void
++askChat(String user): void
++startNewChat(String otheruser, InetAddress othip, int port): void
++run(): void
++getOut(): PrintWriter
++getIn(): BufferedReader
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>340</y>
+      <w>520</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>::PeerChat
+--
+-isLoggedIn: boolean
+~status: JLabel
+~userNameField: JTextField
+~conserv: serverConnectionHandler
+--
++PeerChat(): ctor
++getUserNameField(): JTextField
++loggedIn(): void
++signedOut(): void
++changeStatus(String s): void
++connServer(InetAddress ip, int port, String username): serverConnectionHandler
++getPanel(): JPanel
++main(String[] args): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>340</y>
+      <w>370</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>::Contact
+--
+-username: String
+-key: String
+-ip: InetAddress
+-port: int
+--
++Contact(String username, InetAddress ip, int port): ctor
++getUsername(): String
++setUsername(String username): void
++getIp(): InetAddress
++setIp(InetAddress ip): void
++getPort(): int
++setPort(int port): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>920</x>
+      <y>340</y>
+      <w>270</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>::ChatUI
+--
+-chatArea: JTextArea
+-inputField: JTextField
+~pc: PeerConnection
+~me, other: Contact
+--
++ChatUI(Contact me, Contact other): ctor
+~clickEnterMsg(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>610</y>
+      <w>460</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>::UserList
+--
+-pan: JPanel
+-scroll: JScrollPane
+--
++UserList(ArrayList&lt;String&gt; users, serverConnectionHandler sch): ctor
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

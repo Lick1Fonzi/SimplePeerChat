@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>10</y>
+      <w>480</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>::connectionHandler
+--
+-listusers: ArrayList&lt;User&gt;
+-client: Socket
+-user: User
+-out: PrintWriter
+-in: BufferedReader
+-registered: boolean
+--
++connectionHandler(Socket client, ArrayList&lt;User&gt; usersConnected): ctor
++isPortAvail(int nport, BufferedReader in, PrintWriter out): boolean
++getOut(): PrintWriter
++getIn(): BufferedReader
++startChat(InetAddress ip, int nport, String user): void
++run(): void
++getUser(): User
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>500</x>
+      <y>10</y>
+      <w>290</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>::ServerMsg
+--
++OP_REGISTER = "REGISTER": String
++OP_CHAT = "CHAT": String
++OP_LISTUSERS = "LISTUSERS": String
++OP_HELLO = "HELLO": String
++OP_CLOSE = "CLOSE": String
++ERROR = "ERROR": String
+-operation: String
+-content: String[]
+--
++ServerMsg(String op, String[] content): ctor
++ServerMsg(String txt): ctor
++getOperation(): String
++setOperation(String operation): void
++getUsername(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>300</y>
+      <w>440</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>::User
+--
+-username: String
+-ip: InetAddress
+-ch: connectionHandler
+--
++User(String username, InetAddress ip, connectionHandler ch): ctor
++getUsername(): String
++getIp(): InetAddress
++getCh(): connectionHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>300</y>
+      <w>180</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>::ChatServer
+--
+-serverPort = 6969: int
+--
++main(String[] args): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
