@@ -3,7 +3,7 @@
 
 Unimore project for Distributed algorithms course. 
 The idea is to develop a distributed peer protocol to chat directly each other.
-It is divided in two parts: Client/Peer (NoMitmChat) and Server (NoMitmChat).
+It is divided in two parts: Client/Peer (NoMitmChat) and Server (NoMitmChatServer).
 
 The server only purpose is to keep a list of registered users, in form of ip address and username. \
 The clients are able to communicate directly using UDP sockets in one of these two ways: already knowing the other peer, or registering to the server (through a TCP connection) and asking for a list of registrated users, which it can then contact.
