@@ -1,5 +1,7 @@
 import java.net.InetAddress;
-
+/*
+ * User entity for the server, with a reference to its connection handler.
+ */
 public class User {
 	
 	private String username;

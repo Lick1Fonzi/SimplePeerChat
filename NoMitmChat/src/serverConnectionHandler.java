@@ -9,6 +9,9 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+/*
+ * Handler Thread class of the connection of the client with the server
+ */
 public class serverConnectionHandler implements Runnable{
 
 	private InetAddress ip;
@@ -18,6 +21,9 @@ public class serverConnectionHandler implements Runnable{
 	private PrintWriter out;
 	private BufferedReader in;
 	
+	/*
+	 * Constructor setting up field passed from JFrame like server's ip and port and username of user
+	 */
 	public serverConnectionHandler(InetAddress ip, int port,String username, PeerChat main){
 		this.ip = ip;
 		this.port = port;
@@ -27,7 +33,9 @@ public class serverConnectionHandler implements Runnable{
 		out = null;
 		in = null;
 	}
-	
+	/*
+	 * Checks if specified port is available to open a socket
+	 */
 	public boolean isPortAvail(int port) {
 		try {
 			DatagramSocket ds = new DatagramSocket(port);
@@ -38,10 +46,15 @@ public class serverConnectionHandler implements Runnable{
 		}
 	}
 
+	/*
+	 * Ask the server the list of user connected through LISTUSERS protocol message
+	 */
 	public void getUserList() {
 		this.getOut().println("LISTUSERS");
 	}
-	
+	/*
+	 * Ask the server to initiate protocol to start chatting with specified user through CHAT message
+	 */
 	public void askChat(String user) {
 		try {
 			this.getOut().println("CHAT "+ user);
@@ -56,7 +69,9 @@ public class serverConnectionHandler implements Runnable{
 			e.printStackTrace();
 		}
 	}
-	
+	/*
+	 * Start a peer connection with specified user to chat
+	 */
 	public void startNewChat(String otheruser,InetAddress othip,int port) {
 		try {
 			Contact me = new Contact(main.getUserNameField().getText(),InetAddress.getLocalHost(),port);
@@ -66,7 +81,12 @@ public class serverConnectionHandler implements Runnable{
 			e.printStackTrace();
 		}
 	}
-	
+	/*
+	 * Body of thread function that manages socket. Before listening and responding to server messages, it then registers to the server as a connected user.
+	 * If it receives a STARTUSERS...ENDUSERS msg, the user asked through the app the list of connected user.
+	 * If it receives a PORT msg, a handshake to decide the port to use is in place.
+	 * If it receives a STARTCHAT msg,creates a new peer connection with user specified in server message.
+	 */
 	@Override
 	public void run() {
 		
@@ -156,10 +176,15 @@ public class serverConnectionHandler implements Runnable{
 		}
 	}
 
+	/*
+	 * Socket input getter
+	 */
 	public PrintWriter getOut() {
 		return out;
 	}
-
+	/*
+	 * Socket input getter
+	 */
 	public BufferedReader getIn() {
 		return in;
 	}

@@ -1,5 +1,7 @@
 import java.net.InetAddress;
-
+/*
+ * Contact class, with all informations about a user
+ */
 public class Contact {
 	private String username;
 	private String key;
@@ -28,7 +30,4 @@ public class Contact {
 	public void setPort(int port) {
 		this.port = port;
 	}
-	
-	
-
 }

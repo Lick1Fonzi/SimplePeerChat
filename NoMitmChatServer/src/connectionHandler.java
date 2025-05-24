@@ -9,7 +9,9 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-
+/*
+ * Connection handler Thread class.
+ */
 public class connectionHandler implements Runnable{
 
 	private ArrayList<User> listusers;
@@ -28,7 +30,9 @@ public class connectionHandler implements Runnable{
         this.registered = false;
         this.listusers = usersConnected;
 	}
-
+	/*
+	 * Asks a client if specified port is available for a connection
+	 */
 	public boolean isPortAvail(int nport, BufferedReader in, PrintWriter out) {
 		String line = null;
 		try {
@@ -54,11 +58,17 @@ public class connectionHandler implements Runnable{
 	public BufferedReader getIn() {
 		return in;
 	}
-	
+	/*
+	 * Sends startchat message to the client.
+	 */
 	public void startChat(InetAddress ip,int nport,String user) {
 		this.out.println("STARTCHAT " + ip.getHostAddress() + " " + String.valueOf(nport) + " " + user);
 	}
 
+	/*
+	 * Listens to messages incoming from client. Sends list of connected user if asked.
+	 * If a client asks to start a chat, initiates the procotol, asking both parties the available port.
+	 */
 	@Override
 	public void run() {
 		  		 
@@ -214,6 +224,9 @@ public class connectionHandler implements Runnable{
         }
 	}
 
+	/*
+	 * Thread to ask if a port is available
+	 */
 	private class channelChecker implements Runnable{
 
 		private connectionHandler ch;
@@ -234,7 +247,9 @@ public class connectionHandler implements Runnable{
 		}
 		
 	}
-	
+	/*
+	 * Thread to notify to a client to start a new connection
+	 */
 	private class chatStarter implements Runnable{
 		private connectionHandler mech,youch;
 		private int port;

@@ -1,4 +1,6 @@
-
+/*
+ * Class of messages exchanged between client and server. Here are defined the protocol possible operations.
+ */
 public class ServerMsg {
 
 	public static final String OP_REGISTER = "REGISTER";

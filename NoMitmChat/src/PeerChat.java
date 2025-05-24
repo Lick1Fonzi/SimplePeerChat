@@ -11,13 +11,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/*
+ * Client class.
+ * Sets up the desktop application and launches connections with a server that keeps a register of connected users. 
+ * It needs the ip address of the server, the port that exposes (default 6969) and the username of the user registering in the corresponding text fields.
+ * If registered, the corresponding button will ask the server the list of connected users. I a user is clicked on, it will try to start a chat with him opening a UI chat window.
+ * Can launch directly peer connections to others if info are known (the other's ip and a port otherwise agreed) to start a chat, without the need to be registered to a server.
+ */
 public class PeerChat{
 	
 	private boolean isLoggedIn;
-	JLabel status;
-	JTextField userNameField;
-	serverConnectionHandler conserv;
+	private JLabel status;
+	private JTextField userNameField;
+	private serverConnectionHandler conserv;
 
+	/*
+	 * PeerChat constructor
+	 */
     public PeerChat() {
         this.isLoggedIn = false;
         status = null;
@@ -25,25 +35,40 @@ public class PeerChat{
         conserv = null;
     }
 
+    /*
+     * Getter of Username TextField object
+     */
     public JTextField getUserNameField() {
 		return userNameField;
 	}
 
+    /*
+     * Sets logged in flag
+     */
 	public void loggedIn() {
     	this.isLoggedIn = true;
     }
+    /*
+     * Sets logged out flag
+     */
     public void signedOut() {
     	this.isLoggedIn = false;
     }
-    
+    /*
+     * Change the label showing the status of the connection with the server 
+     */
     public void changeStatus(String s) {
     	status.setText(s);
     }
-    
+    /*
+     * Starts the handler communicating with the server
+     */
     public serverConnectionHandler connServer(InetAddress ip, int port,String username) {
     	return new serverConnectionHandler(ip,port,username,this);
     }
-    
+    /*
+     * Sets up the main panel with all Swing components and the action listeners for the buttons to start connections with both peers and server
+     */
     public JPanel getPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
@@ -130,6 +155,9 @@ public class PeerChat{
         return panel;
     }
 	
+    /*
+     * Main, creates new Desktop app of the client 
+     */
 	public static void main(String[] args) throws SocketException {
 		
 		 	JFrame frame = new JFrame();
@@ -141,29 +169,5 @@ public class PeerChat{
 	        frame.setVisible(true);
 		
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-	        
-	    /*
-        try {
-        	Contact other;
-        	Contact me;
-			Contact tmp1 = new Contact("user1",InetAddress.getByName("127.0.0.1"),5555);
-	        Contact tmp2 = new Contact("user2",InetAddress.getByName("127.0.0.1"),6666);
-	        other = tmp2;
-	        me = tmp1;
-	        if(args.length > 0) {
-	        	other = tmp1;
-	        	me = tmp2;
-	        }
-	        
-			new ChatUI(me,other);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-		
-
-
 	}
 }

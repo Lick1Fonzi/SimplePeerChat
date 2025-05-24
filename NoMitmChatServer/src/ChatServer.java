@@ -6,11 +6,15 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-
+/*
+ * Server main class. Starts listening socket, and starts a new connection handler for each incoming connection from a user.
+ */
 public class ChatServer {
 	
 	static final private int serverPort = 6969;
-	
+	/*
+	 * Server main
+	 */
 	public static void main(String[] args) {
 		
 		ArrayList<User> usersConnected;
