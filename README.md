@@ -43,7 +43,7 @@ Peer can now start chatting.
 Errors are notified from server with a message in the form: ERROR infoerror
 
 ### Peer - Peer 
-Peers use both the same port number. The reason for this, is to bypass NAT rules with UDP Hole Punching. To keep alive the session and not close the temporary nat rule, they keep exchanging a keep-alive token (keep-alive token not implemented here), that is useful also for a timeout to signal a peer has stopped chatting.
+Peers use both the same port number. The reason for this, is to bypass NAT rules with UDP Hole Punching. To keep alive the session and not close the temporary nat rule, they keep exchanging a keep-alive token, that is useful also for a timeout to signal a peer has stopped chatting.
 
 A message is formed as: usernameSender type_of_msg text \
 Three types: CONNECT, MSG, CLOSE (four with keep-alive implementation: KEEPALIVE)
