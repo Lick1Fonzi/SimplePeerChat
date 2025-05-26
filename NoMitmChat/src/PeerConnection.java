@@ -122,7 +122,6 @@ public class PeerConnection implements Runnable{
 				byte[] receive = new byte[65535];
 				DatagramPacket DpReceive = new DatagramPacket(receive, receive.length); 
 				  
-		        // Step 3 : receive the data in byte buffer. 
 		        try {
 					pc.sock.receive(DpReceive);
 					Message m = new Message(data(receive).toString());
